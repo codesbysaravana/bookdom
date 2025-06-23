@@ -3,7 +3,9 @@ import { ReactNode } from 'react'
 import Image from 'next/image'
 import {auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { users } from ""
+import { users } from "../../database/schema";
+import { db } from "../../database/drizzle";
+import { eq } from "drizzle-orm";
 
 const layout = async ({ children } : { children : ReactNode }) => {
     //to prevent routing from main to sign in page and to solidify that user logged in completely 
@@ -12,19 +14,22 @@ const layout = async ({ children } : { children : ReactNode }) => {
     //get session and if theres one
     if(!session) redirect("/sign-in");
 
-    after(async () => {
-        if(!session?.user?.id) return;
-        //if user exists...update last activity date
+    if (session?.user?.id) {
+        const user = await db
+        .select()
+        .from(users)
+        .where(eq(users.id, session.user.id))
+        .limit(1)
 
-        //get user and see if last activity ddate is today
-        const user = await db.select().from(users).where(eq(users.id, session?.user?.id)).limit(1);
+        const today = new Date().toISOString().slice(0, 10)
 
-        if(user[0].lastActivityDate === new Date().toISOString().slice(0, 10))
-            return;
-
-        await db.update(users).set({lastActivityDate: new Date().toISOString().slice(0, 10)})
-    })
-
+        if (user.length && user[0].lastActivityDate !== today) {
+        await db
+            .update(users)
+            .set({ lastActivityDate: today })
+            .where(eq(users.id, session.user.id))
+        }
+    }
 
   return (
     <main className='auth-container'>
