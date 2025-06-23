@@ -3,13 +3,27 @@ import { ReactNode } from 'react'
 import Image from 'next/image'
 import {auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { users } from ""
 
 const layout = async ({ children } : { children : ReactNode }) => {
     //to prevent routing from main to sign in page and to solidify that user logged in completely 
     const session = await auth()
     //wait for auth and proceed
     //get session and if theres one
-    if(session) redirect("/");
+    if(!session) redirect("/sign-in");
+
+    after(async () => {
+        if(!session?.user?.id) return;
+        //if user exists...update last activity date
+
+        //get user and see if last activity ddate is today
+        const user = await db.select().from(users).where(eq(users.id, session?.user?.id)).limit(1);
+
+        if(user[0].lastActivityDate === new Date().toISOString().slice(0, 10))
+            return;
+
+        await db.update(users).set({lastActivityDate: new Date().toISOString().slice(0, 10)})
+    })
 
 
   return (

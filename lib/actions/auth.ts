@@ -9,7 +9,13 @@ import { signIn } from "@/auth";
 import { headers } from "next/headers";
 import ratelimit from "@/lib/ratelimit";
 import { redirect } from "next/navigation";
+import config from "../config"
+import { Client as workflowClient } from "@upstash/workflow";
 
+export const WorkflowClient = new workflowClient({
+    baseUrl: config.env.upstash.qstashUrl,
+    token: config.env.upstash.qstashToken,
+});
 
 //functiion for signing in automatic after signing up
 //picks what parameter to want as inputs
@@ -82,6 +88,14 @@ export const signUp = async (params: AuthCredentials) => {
                 universityId,
                 password: hashedPassword,
                 universityCard,
+            });
+
+            await WorkflowClient.trigger({
+                url: `${config.env.prodAPIEndpoint}/api/workflow/onboarding`,
+                body: {
+                    email,
+                    fullName,
+                },
             });
 
             //automatic sign in after signUP

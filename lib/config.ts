@@ -18,8 +18,13 @@ const config = {
 			serviceId: process.env.EMAILJS_SERVICE_ID!,
 			templateId: process.env.EMAILJS_TEMPLATE_ID!,
 			publicKey: process.env.EMAILJS_PUBLIC_KEY!,
-			privateKey: process.env.EMAILJS_PRIVATE_KEY!, // optional, only if needed for secure server calls
-		}
+			privateKey: process.env.EMAILJS_PRIVATE_KEY!, // optional
+		},
+		sendgrid: {
+			apiKey: process.env.SENDGRID_API_KEY!,
+			sender: process.env.SENDGRID_SENDER!,
+		},
+		
 	},
 };
 
