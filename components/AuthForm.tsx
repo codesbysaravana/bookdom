@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants"
-import ImageUpload from "./ImageUpload" // Assuming this is the correct path to your ImageUpload component
+import FileUpload from "./FileUpload" // Assuming this is the correct path to your ImageUpload component
 import { toast } from "sonner";
 
 /* pulling FieldNames and FieldTypes from manual created constants file Not shadCn */
@@ -92,9 +92,15 @@ const AuthForm = <T extends FieldValues>({
                                     </FormLabel>
                                     <FormControl>
                                     {/* all and most will be inputs in form except univresity card its a image */}
-                                        {fieldProps.name === "universityCard" ? (<ImageUpload
-                                            onFileChange={fieldProps.onChange}
-                                        /> ) : (
+                                        {fieldProps.name === "universityCard" ? (
+                                            <FileUpload
+                                                type='image'
+                                                accept='image/*'
+                                                placeholder='Upload your ID'
+                                                folder='ids'
+                                                variant='dark'
+                                                onFileChange={fieldProps.onChange}
+                                            /> ) : (
                                             /* mentioning the input types from constants file */
                                             <Input 
                                                 required 

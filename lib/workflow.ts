@@ -7,6 +7,12 @@ export const workflowClient = new WorkflowClient({
     token: config.env.upstash.qstashToken,
 });
 
+interface EmailPayload {
+  subject: string;
+  to: string;
+  html?: string;
+}
+
 sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 export const sendEmail = async (subject: string, to: string, html?: string) => {

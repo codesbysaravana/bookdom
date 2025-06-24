@@ -12,6 +12,7 @@ export const navigationLinks = [
   },
 ];
 
+//goes to app/admin/ ---> Sidebar component
 export const adminSideBarLinks = [
   {
     img: "/icons/admin/home.svg",
@@ -188,22 +189,5 @@ export const sampleBooks = [
     video: "/sample-video.mp4?updatedAt=1722593504152",
     summary:
       "Morgan Housel explores the unique behaviors and mindsets that shape financial success and decision-making.",
-  },
-  {
-    id: 9,
-    title: "The Walking Dead",
-    author: "Robert Kirkman",
-    genre: "Horror",
-    rating: 4.9,
-    total_copies: 10,
-    available_copies: 5,
-    description:
-      "Morgan Housel explores the unique behaviors and mindsets that shape financial success and decision-making.",
-    color: "#ffffff",
-    cover:
-      "https://imagecomics.fandom.com/wiki/The_Walking_Dead_Deluxe_Vol_1_1?file=The_Walking_Dead_Deluxe_Vol_1_1_Variant.jpg",
-    video: "/sample-video.mp4?updatedAt=1722593504152",
-    summary:
-      "Rick Grimes leads a group of survivors through a zombie apocalypse, facing deadly threats from both the undead and fellow humans.",
   },
 ];
