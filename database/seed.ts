@@ -5,7 +5,7 @@ import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
 import { config } from "dotenv";
 
-config({ path: ".env.local" });
+config({ path: ".env.local" }); //access to env var
 
 const sql = neon(process.env.DATABASE_URL!);
 export const db = drizzle({ client: sql });
@@ -65,3 +65,7 @@ const seed = async () => {
 };
 
 seed();
+
+//what is database seeding
+
+//Database seeding is the process of populating a database with an initial set of data. This is often done during development and testing to provide a consistent set of data for the application to work with. It's like planting seeds to get the database growing

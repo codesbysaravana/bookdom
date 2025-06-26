@@ -1,30 +1,23 @@
-import React from 'react'
-import { Button } from "../../../components/ui/button";
-import { signOut } from "@/auth"
-import { sampleBooks } from '@/constants';
-import BookList from '@/components/BookList';
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { signOut } from "@/auth";
+import BookList from "@/components/BookList";
+import { sampleBooks } from "@/constants";
 
-
-//need to keep tihs page server render
-//for logout functionality
-const page = () => {
+const Page = () => {
   return (
     <>
-        <form action={async () => {
-            'use server';
+      <form
+        action={async () => {
+          "use server";
 
-            await signOut();
+          await signOut();
         }}
-        className='mb-10'
-        >
-            <Button>Logout</Button>
-        </form>
-
-
-        {/* //show the books the current user has borrowed */}
-        <BookList title="Borrowed Books" books={sampleBooks} />
+        className="mb-10"
+      >
+        <Button>Logout</Button>
+      </form>
     </>
-  )
-}
-
-export default page
+  );
+};
+export default Page;

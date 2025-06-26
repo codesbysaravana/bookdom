@@ -2,7 +2,7 @@ import React from 'react'
 import { ReactNode } from 'react'
 
 //@allowImportingTsExtensions
-import Header from '../../components/Header'
+import Header from "@/components/Header";
 import {auth } from "@/auth";
 import { redirect } from "next/navigation";
 
@@ -20,7 +20,7 @@ const layout = async ({ children } : { children: ReactNode}) => {
     <main className="root-container">
       {/* main class name root containder to solidify that this is the main root containder */}
         <div className='mx-auto max-w-7xl'>
-            <Header session={session}/>
+            <Header/>
 
             <div className='mt-20 pb-20'>
                 {children}

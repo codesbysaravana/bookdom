@@ -54,7 +54,3 @@ const BookCoverSvg = ({ coverColor }: { coverColor: string }) => {
 };
 
 export default BookCoverSvg;
-
-
-//just a list of all componenrts SVGs that are used in the BookCover component
-// This component renders an SVG representation of a book cover with a specified color. 
