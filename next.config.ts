@@ -21,12 +21,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  //to ignore ts buld errors during vercel builds
   typescript: {
     ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
 };
 
